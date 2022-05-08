@@ -68,8 +68,8 @@ const Order = () => {
             </div>
           </div>
           <div className={statusClass(1)}>
-            <Image src="/img/chef.svg" width={40} height={55} alt="" />
-            <span>Preparing</span>
+            <Image src="/img/confirming.svg" width={40} height={55} alt="" />
+            <span>Confirming order</span>
             <div className={styles.checkedIcon}>
               <Image
                 className={styles.checkedIcon}
@@ -94,8 +94,8 @@ const Order = () => {
             </div>
           </div>
           <div className={statusClass(3)}>
-            <Image src="/img/package.svg" width={40} height={55} alt="" />
-            <span>Delivered</span>
+            <Image src="/img/tick.svg" width={40} height={55} alt="" />
+            <span>Request completed</span>
             <div className={styles.checkedIcon}>
               <Image
                 className={styles.checkedIcon}

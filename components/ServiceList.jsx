@@ -1,7 +1,7 @@
 import styles from "../styles/ServiceList.module.css";
 import ServiceCard from "./ServiceCard";
 
-const ServiceList = () => {
+const ServiceList = ({ serviceList }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Affordable services at your doorstep</h1>
@@ -11,14 +11,9 @@ const ServiceList = () => {
         sit amet, consectetur adipiscing elit.
       </p>
       <div className={styles.wrapper}>
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
-        <ServiceCard />
+        {serviceList.map((service) => (
+          <ServiceCard key={service._id} service={service} />
+        ))}
       </div>
     </div>
   );

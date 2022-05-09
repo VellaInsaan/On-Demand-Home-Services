@@ -1,17 +1,35 @@
 import styles from "../../styles/Service.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import axios from "axios";
 
-const Service = () => {
+const Service = ({ service }) => {
+  const [price, setPrice] = useState(service.prices[0]);
+  const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
-  const service = {
-    id: 1,
-    img: "/img/mechanic.png",
-    name: "MECHANIC",
-    price: [250, 350, 500],
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
+  const [extras, setExtras] = useState([]);
+
+  const changePrice = (number) => {
+    setPrice(price + number);
   };
 
+  const handleSize = (sizeIndex) => {
+    const difference = service.prices[sizeIndex] - service.prices[size];
+    setSize(sizeIndex);
+    changePrice(difference);
+  };
+
+  const handleChange = (e, option) => {
+    const checked = e.target.checked;
+
+    if (checked) {
+      changePrice(option.price);
+      setExtras((prev) => [...prev, option]);
+    } else {
+      changePrice(-option.price);
+      setExtras(extras.filter((extra) => extra._id !== option._id));
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -20,12 +38,12 @@ const Service = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <h1 className={styles.title}>{service.name}</h1>
-        <span className={styles.price}>₹{service.price[size]}</span>
+        <h1 className={styles.title}>{service.title}</h1>
+        <span className={styles.price}>₹{price}</span>
         <p className={styles.desc}>{service.desc}</p>
         <h3 className={styles.choose}>Choose priorty</h3>
         <div className={styles.sizes}>
-          <div className={styles.size} onClick={() => setSize(0)}>
+          <div className={styles.size} onClick={() => handleSize(0)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -42,7 +60,7 @@ const Service = () => {
             </svg>
             <span className={styles.number}>3 HRS</span>
           </div>
-          <div className={styles.size} onClick={() => setSize(1)}>
+          <div className={styles.size} onClick={() => handleSize(1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -59,7 +77,7 @@ const Service = () => {
             </svg>
             <span className={styles.number}>1 HR</span>
           </div>
-          <div className={styles.size} onClick={() => setSize(2)}>
+          <div className={styles.size} onClick={() => handleSize(2)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -79,50 +97,42 @@ const Service = () => {
         </div>
         <h3 className={styles.choose}>Choose additionals</h3>
         <div className={styles.ingredients}>
-          <div className={styles.option}>
-            <input
-              type="checkbox"
-              id="Ncontact"
-              name="Ncontact"
-              className={styles.checkbox}
-            />
-            <label htmlFor="Ncontact">No contact</label>
-          </div>
-          <div className={styles.option}>
-            <input
-              className={styles.checkbox}
-              type="checkbox"
-              id="3mo"
-              name="3mo"
-            />
-            <label htmlFor="3mo">3 months cover</label>
-          </div>
-          <div className={styles.option}>
-            <input
-              className={styles.checkbox}
-              type="checkbox"
-              id="fStar"
-              name="fStar"
-            />
-            <label htmlFor="fStar">5 Star Proffesional</label>
-          </div>
-          <div className={styles.option}>
-            <input
-              className={styles.checkbox}
-              type="checkbox"
-              id="awClean"
-              name="awClean"
-            />
-            <label htmlFor="awClean">After work cleaning</label>
-          </div>
+          {service.extraOptions.map((option) => (
+            <div className={styles.option} key={option._id}>
+              <input
+                type="checkbox"
+                id={option.text}
+                name={option.text}
+                className={styles.checkbox}
+                onChange={(e) => handleChange(e, option)}
+              />
+              <label htmlFor="Ncontact">{option.text}</label>
+            </div>
+          ))}
         </div>
         <div className={styles.add}>
-          <input type="number" defaultValue={1} className={styles.quantity} />
+          <input
+            onChange={(e) => setQuantity(e.target.value)}
+            type="number"
+            defaultValue={1}
+            className={styles.quantity}
+          />
           <button className={styles.button}>Add to Cart</button>
         </div>
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(
+    `http://localhost:3000/api/products/${params.id}`
+  );
+  return {
+    props: {
+      service: res.data,
+    },
+  };
 };
 
 export default Service;

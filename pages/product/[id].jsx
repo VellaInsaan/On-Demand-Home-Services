@@ -2,12 +2,15 @@ import styles from "../../styles/Service.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addService } from "../../redux/cartSlice";
 
 const Service = ({ service }) => {
   const [price, setPrice] = useState(service.prices[0]);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(0);
   const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
 
   const changePrice = (number) => {
     setPrice(price + number);
@@ -30,6 +33,11 @@ const Service = ({ service }) => {
       setExtras(extras.filter((extra) => extra._id !== option._id));
     }
   };
+
+  const handleClick = () => {
+    dispatch(addService({ ...service, extras, price, quantity }));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -117,7 +125,9 @@ const Service = ({ service }) => {
             defaultValue={1}
             className={styles.quantity}
           />
-          <button className={styles.button}>Add to Cart</button>
+          <button className={styles.button} onClick={handleClick}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

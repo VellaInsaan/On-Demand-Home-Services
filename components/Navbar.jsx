@@ -33,9 +33,18 @@ function Navbar() {
       </div>
       <div className={styles.item}>
         <ul className={styles.list}>
-          <li className={styles.listItem}>Home</li>
+          <Link href="/" passHref>
+            <li className={styles.listItem}>Home</li>
+          </Link>
           <li className={styles.listItem}>Services</li>
-          <Image src="/img/logo.png" alt="logo" height="120px" width="190px" />
+          <Link href="/" passHref>
+            <Image
+              src="/img/logo.png"
+              alt="logo"
+              height="120px"
+              width="190px"
+            />
+          </Link>
           <li className={styles.listItem}>Contact Us</li>
           <li className={styles.listItem}>About</li>
         </ul>

@@ -57,9 +57,10 @@
 }
 
 .listItem {
-  margin: 44px;
-  padding-left: 20px;
+  margin: 33px;
+  padding-left: 15px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .cart {

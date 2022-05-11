@@ -36,7 +36,9 @@ function Navbar() {
           <Link href="/" passHref>
             <li className={styles.listItem}>Home</li>
           </Link>
-          <li className={styles.listItem}>Services</li>
+          <Link href="#listService" passHref>
+            <li className={styles.listItem}>Services</li>
+          </Link>
           <Link href="/" passHref>
             <Image
               src="/img/logo.png"
@@ -45,6 +47,7 @@ function Navbar() {
               width="190px"
             />
           </Link>
+
           <li className={styles.listItem}>Contact Us</li>
           <li className={styles.listItem}>About</li>
         </ul>

@@ -4,9 +4,9 @@ import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
 
 const Index = ({ orders, products }) => {
-  const [serviceList, setPizzaList] = useState(products);
+  const [serviceList, setServiceList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
-  const status = ["preparing", "on the way", "delivered"];
+  const status = ["Confirming Order", "on the way", "request completed"];
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -14,7 +14,7 @@ const Index = ({ orders, products }) => {
       const res = await axios.delete(
         "http://localhost:3000/api/products/" + id
       );
-      setPizzaList(serviceList.filter((service) => service._id !== id));
+      setServiceList(serviceList.filter((service) => service._id !== id));
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +65,7 @@ const Index = ({ orders, products }) => {
                 </td>
                 <td>{product._id.slice(0, 5)}...</td>
                 <td>{product.title}</td>
-                <td>${product.prices[0]}</td>
+                <td>₹{product.prices[0]}</td>
                 <td>
                   <button className={styles.button}>Edit</button>
                   <button
@@ -98,7 +98,7 @@ const Index = ({ orders, products }) => {
               <tr className={styles.trTitle}>
                 <td>{order._id.slice(0, 5)}...</td>
                 <td>{order.customer}</td>
-                <td>${order.total}</td>
+                <td>₹{order.total}</td>
                 <td>
                   {order.method === 0 ? <span>cash</span> : <span>paid</span>}
                 </td>

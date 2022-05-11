@@ -116,7 +116,7 @@ const Order = ({ order }) => {
             <b className={styles.totalTextTitle}>Subtotal:</b>₹{order.total}
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Discount:</b>$0.00
+            <b className={styles.totalTextTitle}>Discount:</b>₹0.00
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Total:</b>₹{order.total}

@@ -3,12 +3,11 @@ import ServiceCard from "./ServiceCard";
 
 const ServiceList = ({ serviceList }) => {
   return (
-    <div className={styles.container}>
+    <div id="listService" className={styles.container}>
       <h1 className={styles.title}>Affordable services at your doorstep</h1>
       <p className={styles.desc}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit arcu
-        in pretium molestie. Interdum et malesuada fames acme. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit.
+        Best place to solve you daily household problems @Low cost. High Quality
+        . Best Hygiene
       </p>
       <div className={styles.wrapper}>
         {serviceList.map((service) => (

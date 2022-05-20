@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addService } from "../../redux/cartSlice";
+import dbConnect from "../../util/mongo";
+import Product from "../../models/Product";
 
 const Service = ({ service }) => {
   const [price, setPrice] = useState(service.prices[0]);
@@ -135,12 +137,13 @@ const Service = ({ service }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(
-    `http://nthing.vercel.app/api/products/${params.id}`
-  );
+  const { id } = params;
+  await dbConnect();
+
+  const res = await Product.findById(id);
   return {
     props: {
-      service: res.data,
+      service: JSON.parse(JSON.stringify(res)),
     },
   };
 };

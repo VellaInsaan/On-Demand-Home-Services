@@ -12,7 +12,7 @@ const Index = ({ orders, products }) => {
     console.log(id);
     try {
       const res = await axios.delete(
-        "http://nthing.vercel.app/api/products/" + id
+        "https://nthing.vercel.app/api/products/" + id
       );
       setServiceList(serviceList.filter((service) => service._id !== id));
     } catch (err) {
@@ -25,9 +25,12 @@ const Index = ({ orders, products }) => {
     const currentStatus = item.status;
 
     try {
-      const res = await axios.put("http://nthing.vercel.app/api/orders/" + id, {
-        status: currentStatus + 1,
-      });
+      const res = await axios.put(
+        "https://nthing.vercel.app/api/orders/" + id,
+        {
+          status: currentStatus + 1,
+        }
+      );
       setOrderList([
         res.data,
         ...orderList.filter((order) => order._id !== id),
@@ -129,8 +132,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get("http://nthing.vercel.app/api/products");
-  const orderRes = await axios.get("http://nthing.vercel.app/api/orders");
+  const productRes = await axios.get("https://nthing.vercel.app/api/products");
+  const orderRes = await axios.get("https://nthing.vercel.app/api/orders");
 
   return {
     props: {

@@ -135,7 +135,7 @@ export const getServerSideProps = async ({ params }) => {
   await dbConnect();
   const res = await Product.findById(id);
   return {
-    props: { order: res.data },
+    props: { order: JSON.parse(JSON.stringify(res)) },
   };
 };
 

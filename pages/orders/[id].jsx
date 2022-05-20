@@ -1,7 +1,9 @@
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import dbConnect from "../../util/mongo";
-const Order = ({ order }) => {
+import Order from "../../models/Order";
+
+const Orders = ({ order }) => {
   const status = order.status;
 
   const statusClass = (index) => {
@@ -132,12 +134,12 @@ const Order = ({ order }) => {
 export const getServerSideProps = async ({ params }) => {
   const { id } = params;
   await dbConnect();
-  const res = await Order.findById(id);
+  const order = await Order.findById(id);
   return {
     props: {
-      order: JSON.parse(JSON.stringify(res)),
+      order: JSON.parse(JSON.stringify(order)),
     },
   };
 };
 
-export default Order;
+export default Orders;

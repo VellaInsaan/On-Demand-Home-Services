@@ -139,7 +139,6 @@ const Service = ({ service }) => {
 export const getServerSideProps = async ({ params }) => {
   const { id } = params;
   await dbConnect();
-
   const res = await Product.findById(id);
   return {
     props: {

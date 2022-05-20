@@ -136,7 +136,7 @@ const Service = ({ service }) => {
 
 export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
-    `http://localhost:3000/api/products/${params.id}`
+    `http://nthing.vercel.app/api/products/${params.id}`
   );
   return {
     props: {

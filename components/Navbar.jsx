@@ -36,7 +36,7 @@ function Navbar() {
           <Link href="/" passHref>
             <li className={styles.listItem}>Home</li>
           </Link>
-          <Link href="#listService" passHref>
+          <Link href="/#listService" passHref>
             <li className={styles.listItem}>Services</li>
           </Link>
           <Link href="/" passHref>
@@ -51,7 +51,7 @@ function Navbar() {
           <Link href="#footer" passHref>
             <li className={styles.listItem}>Contact Us</li>
           </Link>
-          <Link href="#footer" passHref>
+          <Link href="/#footer" passHref>
             <li className={styles.listItem}>About</li>
           </Link>
         </ul>

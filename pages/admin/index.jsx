@@ -2,6 +2,9 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
+import dbConnect from "../../util/mongo";
+import Product from "../../models/Product";
+import Order from "../../models/Order";
 
 const Index = ({ orders, products }) => {
   const [serviceList, setServiceList] = useState(products);
@@ -131,14 +134,14 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-
-  const productRes = await axios.get("https://nthing.vercel.app/api/products");
-  const orderRes = await axios.get("https://nthing.vercel.app/api/orders");
+  await dbConnect();
+  const productRes = await Product.find().lean();
+  const orderRes = await Order.find().lean();
 
   return {
     props: {
-      orders: orderRes.data,
-      products: productRes.data,
+      orders: JSON.parse(JSON.stringify(orderRes)),
+      products: JSON.parse(JSON.stringify(productRes)),
     },
   };
 };

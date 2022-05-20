@@ -41,6 +41,7 @@ function Navbar() {
           </Link>
           <Link href="/" passHref>
             <Image
+              className={styles.logo}
               src="/img/logo.png"
               alt="logo"
               height="120px"

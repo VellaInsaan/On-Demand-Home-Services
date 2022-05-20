@@ -1,12 +1,12 @@
-import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import Add from "../components/Add";
 import AddButton from "../components/AddButton";
 import Featured from "../components/Featured";
 import ServiceList from "../components/ServiceList";
 import styles from "../styles/Home.module.css";
+import dbConnect from "../util/mongo";
+import Products from "../models/Product";
 
 export default function Home({ serviceList, admin }) {
   const [close, setClose] = useState(true);
@@ -28,15 +28,15 @@ export default function Home({ serviceList, admin }) {
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req?.cookies || "";
   let admin = false;
-
   if (myCookie.token === process.env.TOKEN) {
     admin = true;
   }
 
-  const res = await axios.get("http://localhost:3000/api/products");
+  await dbConnect();
+  const res = await Products.find().lean();
   return {
     props: {
-      serviceList: res.data,
+      serviceList: JSON.parse(JSON.stringify(res)),
       admin,
     },
   };

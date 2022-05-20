@@ -131,7 +131,9 @@ const Order = ({ order }) => {
 };
 
 export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  const { id } = params;
+  await dbConnect();
+  const res = await Product.findById(id);
   return {
     props: { order: res.data },
   };

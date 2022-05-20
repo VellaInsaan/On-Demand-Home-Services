@@ -48,9 +48,12 @@ function Navbar() {
               width="190px"
             />
           </Link>
-
-          <li className={styles.listItem}>Contact Us</li>
-          <li className={styles.listItem}>About</li>
+          <Link href="#footer" passHref>
+            <li className={styles.listItem}>Contact Us</li>
+          </Link>
+          <Link href="#footer" passHref>
+            <li className={styles.listItem}>About</li>
+          </Link>
         </ul>
       </div>
       <Link href="/cart" passHref>

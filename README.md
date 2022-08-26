@@ -39,4 +39,4 @@ Start the server
   npm run start
 ```
 
-Make sure you change the api name of cloudinary from Add.jsx to your own Cloud Name 
+Make sure you change the api name of cloudinary present in Add.jsx to your own Cloud Name 

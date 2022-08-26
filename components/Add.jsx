@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Add.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
-const cloud_name = process.env.cloud_name;
+const cloud_name = process.env.CLOUD_NAME;
 
 const Add = ({ setClose }) => {
   const [file, setFile] = useState(null);
@@ -32,7 +32,7 @@ const Add = ({ setClose }) => {
     data.append("upload_preset", "uploads");
     try {
       const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/cloud_name/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         data
       );
 

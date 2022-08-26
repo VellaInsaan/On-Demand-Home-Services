@@ -3,7 +3,7 @@
 
 A web application which allows user to request househould services on their doorsteps
 
-Live at :- [nthing.vercel.app] (nthing.vercel.app)
+Live at :- [nthing.vercel.app](nthing.vercel.app)
 ## Run Locally
 
 Clone the project
